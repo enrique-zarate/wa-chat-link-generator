@@ -12,6 +12,13 @@
       rel="stylesheet"
     />
     <link rel="icon" type="x-icon" href="/img/wa-link-enri.ico" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
+      integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+      crossorigin="anonymous"
+    />
+
     <script>
       tailwind.config = {
         theme: {
@@ -23,7 +30,9 @@
     </script>
   </head>
   <body class="font-Montserrat">
-    <nav class="bg-teal-500 p-7"></nav>
+    <nav class="bg-teal-500 p-7">
+      <p class="text-white">💡 Próximamente: área de texto ampliada</p>
+    </nav>
     <div id="info" class="m-10">
       <h1 class="text-4xl font-bold font-montserrat">
         Envía mensajes de Whatsapp
@@ -82,13 +91,21 @@
       </form>
     </div>
     <div class="m-6 text-center bg-gray-200 text-sm p-2">
-      <a
-        class="text-blue-800 underline-offset-2"
-        href="https://github.com/enrique-zarate"
-        target="_blank"
-        >GitHub</a
-      >
-      <p class="text-slate-700">© 2022 Enrique Zárate.</p>
+      <div class="">
+        <a
+          class="text-blue-800 underline-offset-2 mr-3"
+          href="https://github.com/enrique-zarate"
+          target="_blank"
+          ><i class="fab fa-github"></i> GitHub</a
+        >
+        <a
+          class="text-blue-800 underline-offset-2"
+          href="https://twitter.com/enri_zarate"
+          target="_blank"
+          ><i class="fab fa-twitter"></i> Twitter</a
+        >
+      </div>
+      <p class="text-slate-700 mt-2">© 2022 Enrique Zárate.</p>
     </div>
 
     <script>
