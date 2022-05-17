@@ -126,8 +126,12 @@
         // tomar mensaje
         const message = document.getElementById("message").value;
 
+        //reemplazar saltos de linea por cod para brk line en la URL
+        const res = message.split("\n").join("%0a");
+        // console.log(res);
+
         // armar enlace
-        const link = `https://wa.me/${contactNumber}?text=${message}`;
+        const link = `https://wa.me/${contactNumber}?text=${res}`;
 
         // abrir enlace en nueva pestanha
         window.open(link, "_blank");
