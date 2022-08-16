@@ -131,6 +131,7 @@
       //crear selector de codigo de region
       const phoneInputField = document.querySelector("#contact-number");
       const phoneInput = window.intlTelInput(phoneInputField, {
+        // TO-DO: Initial country based on user location
         initialCountry: "py",
         preferredCountries: ["py", "ar", "co", "uy"],
         utilsScript:
