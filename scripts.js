@@ -13,14 +13,14 @@ const phoneInput = window.intlTelInput(phoneInputField, {
 
 const info = document.querySelector("#alert-info");
 
-function process(event) {
-  event.preventDefault();
+// function process(event) {
+//   event.preventDefault();
 
-  const phoneNumber = phoneInput.getNumber();
+//   const phoneNumber = phoneInput.getNumber();
 
-  info.style.display = "";
-  info.innerHTML = `Phone number in E.164 format: <strong>${phoneNumber}</strong>`;
-}
+//   info.style.display = "";
+//   info.innerHTML = `Phone number in E.164 format: <strong>${phoneNumber}</strong>`;
+// }
 
 // definir la funcion que armar el enlace
 function onButtonClick() {
@@ -43,6 +43,9 @@ function onButtonClick() {
 
   // abrir enlace en nueva pestanha
   window.open(link, "_blank");
+
+  // guardar el numero en local storage
+  localStorage.setItem("contactNumber", phoneNumber);
 }
 
 // agregar Event Listener al boton
