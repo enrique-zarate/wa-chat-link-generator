@@ -3,33 +3,58 @@ const buttonElement = document.querySelector("button");
 
 //crear selector de codigo de region
 const phoneInputField = document.querySelector("#contact-number");
-const phoneInput = window.intlTelInput(phoneInputField, {
-  // TO-DO: Initial country based on user location
-  initialCountry: "py",
-  preferredCountries: ["py", "ar", "co", "uy"],
-  utilsScript:
-    "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
-});
+const phoneInputFun = async () => {
+  window.intlTelInput(phoneInputField, {
+    initialCountry: await phoneCountryDisplayCheck(),
+    preferredCountries: ["py", "ar", "co", "uy", "br"],
+    utilsScript:
+      "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+  });
+};
 
-const info = document.querySelector("#alert-info");
+const phoneInput = phoneInputFun();
 
-// function process(event) {
-//   event.preventDefault();
+// console.log("phoneInput keys", Object.keys(phoneInput));
+// console.log("phoneInput", phoneInput);
+// console.log("phoneInput property", phoneInput.s.iso2);
 
-//   const phoneNumber = phoneInput.getNumber();
+// funcion que verifica si hay algun numero guardado
+phoneDisplayCheck();
 
-//   info.style.display = "";
-//   info.innerHTML = `Phone number in E.164 format: <strong>${phoneNumber}</strong>`;
-// }
+// funcion que verifica el codigo de pais guardado
+// phoneCountryDisplayCheck();
 
-// definir la funcion que armar el enlace
+async function phoneCountryDisplayCheck() {
+  if (localStorage.getItem("NumberCountry")) {
+    const phoneCountryStored = localStorage.getItem("NumberCountry");
+    return phoneCountryStored;
+  } else {
+    const userCountryCode = async () => {
+      let countryCode = await fetch("https://ipapi.co/country_code");
+      // traemos
+      let countryCodeText = await countryCode.text();
+      return countryCodeText;
+    };
+    return await userCountryCode();
+  }
+}
+
+function phoneDisplayCheck() {
+  if (localStorage.getItem("contactNumber")) {
+    const phoneNumberStored = localStorage.getItem("contactNumber");
+    console.log("phoneDisplayCheck", phoneNumberStored);
+
+    phoneInputField.value = phoneNumberStored;
+  }
+}
+
+// definir la funcion que arma el enlace
 function onButtonClick() {
   // tomar numero
   // const contactNumber = document.getElementById("contact-number").value;
 
   // tomar numero con codigo de zona
   const phoneNumber = phoneInput.getNumber();
-  console.log(phoneNumber);
 
   // tomar mensaje
   const message = document.getElementById("message").value;
@@ -46,6 +71,10 @@ function onButtonClick() {
 
   // guardar el numero en local storage
   localStorage.setItem("contactNumber", phoneNumber);
+
+  // guardar la info del pais
+  const phoneCountry = phoneInput.s.iso2;
+  localStorage.setItem("NumberCountry", phoneCountry);
 }
 
 // agregar Event Listener al boton
