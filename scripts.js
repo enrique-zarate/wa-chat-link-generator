@@ -14,15 +14,8 @@ const phoneInputFun = async () => {
 
 const phoneInput = phoneInputFun();
 
-// console.log("phoneInput keys", Object.keys(phoneInput));
-// console.log("phoneInput", phoneInput);
-// console.log("phoneInput property", phoneInput.s.iso2);
-
 // funcion que verifica si hay algun numero guardado
 phoneDisplayCheck();
-
-// funcion que verifica el codigo de pais guardado
-// phoneCountryDisplayCheck();
 
 async function phoneCountryDisplayCheck() {
   if (localStorage.getItem("NumberCountry")) {
@@ -54,7 +47,9 @@ function onButtonClick() {
   // const contactNumber = document.getElementById("contact-number").value;
 
   // tomar numero con codigo de zona
-  const phoneNumber = phoneInput.getNumber();
+  const phoneNumber = document.getElementById("contact-number").value;
+  console.log("phoneNumber", phoneNumber);
+  // const phoneNumber = phoneInput.getNumber();
 
   // tomar mensaje
   const message = document.getElementById("message").value;
