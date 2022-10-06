@@ -5,22 +5,31 @@ const buttonElement = document.querySelector("button");
 const phoneInputField = document.querySelector("#contact-number");
 const phoneInput = window.intlTelInput(phoneInputField, {
   // TO-DO: Initial country based on user location
-  initialCountry: "py",
+  initialCountry: phoneCountryDisplayCheck(),
   preferredCountries: ["py", "ar", "co", "uy"],
+  separateDialCode: false,
   utilsScript:
     "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
 });
 
-const info = document.querySelector("#alert-info");
+// funcion que verifica si hay algun numero guardado
+phoneDisplayCheck();
 
-// function process(event) {
-//   event.preventDefault();
+function phoneCountryDisplayCheck() {
+  if (localStorage.getItem("NumberCountry")) {
+    const phoneCountryStored = localStorage.getItem("NumberCountry");
+    return phoneCountryStored;
+  }
+}
 
-//   const phoneNumber = phoneInput.getNumber();
+function phoneDisplayCheck() {
+  if (localStorage.getItem("contactNumber")) {
+    const phoneNumberStored = localStorage.getItem("contactNumber");
+    console.log("phoneDisplayCheck", phoneNumberStored);
 
-//   info.style.display = "";
-//   info.innerHTML = `Phone number in E.164 format: <strong>${phoneNumber}</strong>`;
-// }
+    phoneInputField.value = phoneNumberStored;
+  }
+}
 
 // definir la funcion que armar el enlace
 function onButtonClick() {
@@ -46,6 +55,10 @@ function onButtonClick() {
 
   // guardar el numero en local storage
   localStorage.setItem("contactNumber", phoneNumber);
+
+  // guardar la info del pais
+  const phoneCountry = phoneInput.s.iso2;
+  localStorage.setItem("NumberCountry", phoneCountry);
 }
 
 // agregar Event Listener al boton
